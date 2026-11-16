@@ -70,3 +70,29 @@ eventos y decoración del hogar.
 pertenece a una sola categoría.
 
 **Categorías iniciales:** Ramos, Arreglos florales, Plantas de interior, Cajas y detalles.
+
+## 5. Elementos principales de la interfaz
+
+| Elemento        | Función                                                              |
+|-----------------|----------------------------------------------------------------------|
+| Header          | Muestra el logotipo, el nombre de la tienda y la navegación.         |
+| CategoryFilter  | Muestra las categorías y permite seleccionar una para filtrar.       |
+| ProductList     | Contiene el catálogo y muestra varias tarjetas de productos.         |
+| ProductCard     | Tarjeta de un producto: imagen, nombre, descripción, precio y categoría. |
+
+**Boceto de la interfaz:**
+
+```
++----------------------------------------------------------------+
+| [Logo] Bella Flora              Inicio  Catálogo  Categorías   |  <- Header
++----------------------------------------------------------------+
+| [Todas] [Ramos] [Arreglos] [Plantas] [Cajas]                   |  <- CategoryFilter
++----------------------------------------------------------------+
+| +------------+   +------------+   +------------+               |
+| |  imagen    |   |  imagen    |   |  imagen    |               |
+| | Nombre     |   | Nombre     |   | Nombre     |               |  <- ProductList
+| | Categoría  |   | Categoría  |   | Categoría  |               |     con ProductCard
+| | S/ 00.00   |   | S/ 00.00   |   | S/ 00.00   |               |
+| +------------+   +------------+   +------------+               |
++----------------------------------------------------------------+
+```
