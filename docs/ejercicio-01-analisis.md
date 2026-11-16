@@ -96,3 +96,41 @@ pertenece a una sola categoría.
 | +------------+   +------------+   +------------+               |
 +----------------------------------------------------------------+
 ```
+
+## 6. Esquema de comunicación
+
+```
++---------------------------+
+|        FRONTEND           |
+|    ReactJS + Vite         |
+|   http://localhost:5173   |
++---------------------------+
+      |               ^
+      | Petición HTTP | Respuesta
+      | GET (fetch)   | en JSON
+      v               |
++---------------------------+
+|         BACKEND           |
+|  Django REST Framework    |
+|   http://localhost:8000   |
++---------------------------+
+      |               ^
+      | Consultas     | Datos
+      | (ORM)         |
+      v               |
++---------------------------+
+|      BASE DE DATOS        |
+|   SQLite (db.sqlite3)     |
++---------------------------+
+```
+
+**Endpoints previstos:**
+
+| Método | Ruta              | Descripción                    |
+|--------|-------------------|--------------------------------|
+| GET    | /api/categorias/  | Lista de categorías            |
+| GET    | /api/productos/   | Lista de productos             |
+
+**Flujo:** el usuario abre la tienda en React, que solicita los datos a Django
+mediante `fetch`; Django los consulta en la base de datos y los devuelve en
+formato JSON para que React los muestre en pantalla.
