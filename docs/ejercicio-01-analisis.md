@@ -22,3 +22,25 @@ eventos y decoración del hogar.
 - Arreglos florales en floreros, canastas y cajas.
 - Plantas de interior y de ornamento.
 - Detalles y regalos complementarios (cajas de regalo, tarjetas, peluches).
+
+## 3. Funcionalidades de la primera versión
+
+**Incluidas en esta versión:**
+
+- Mostrar el catálogo de productos en la página principal.
+- Mostrar cada producto en una tarjeta con su información (nombre, descripción,
+  precio, imagen y categoría).
+- Mostrar la lista de categorías disponibles.
+- Filtrar los productos según la categoría seleccionada.
+- Navegación principal mediante un encabezado con el logotipo y el nombre de la tienda.
+- Obtener productos y categorías desde el backend mediante servicios REST.
+- Administrar productos y categorías desde el panel de administración de Django.
+- Mostrar mensajes de carga y de error al consultar la información.
+- Interfaz adaptable a distintos tamaños de pantalla (responsive).
+
+**Fuera del alcance de esta versión** (se agregarán en laboratorios posteriores):
+
+- Carrito de compras.
+- Registro de pedidos.
+- Autenticación de clientes.
+- Pasarela de pagos.
