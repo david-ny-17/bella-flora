@@ -44,3 +44,29 @@ eventos y decoración del hogar.
 - Registro de pedidos.
 - Autenticación de clientes.
 - Pasarela de pagos.
+
+## 4. Información de los productos
+
+### Producto
+
+| Campo        | Descripción                          | Tipo de dato (Django)     |
+|--------------|--------------------------------------|---------------------------|
+| id           | Identificador único (automático)     | AutoField                 |
+| nombre       | Nombre del producto                  | CharField                 |
+| descripcion  | Descripción del producto             | TextField                 |
+| precio       | Precio de venta                      | DecimalField              |
+| categoria    | Categoría a la que pertenece         | ForeignKey (Categoria)    |
+| imagen       | Imagen o URL de la imagen            | URLField                  |
+| stock        | Cantidad disponible                  | PositiveIntegerField      |
+
+### Categoría
+
+| Campo  | Descripción                      | Tipo de dato (Django) |
+|--------|----------------------------------|-----------------------|
+| id     | Identificador único (automático) | AutoField             |
+| nombre | Nombre de la categoría           | CharField             |
+
+**Relación:** una categoría tiene muchos productos (uno a muchos); cada producto
+pertenece a una sola categoría.
+
+**Categorías iniciales:** Ramos, Arreglos florales, Plantas de interior, Cajas y detalles.
