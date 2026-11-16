@@ -1,0 +1,1 @@
+# Ejercicio 01: Análisis del negocio y planificación de la aplicación
