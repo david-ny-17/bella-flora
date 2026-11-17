@@ -10,10 +10,21 @@ function HomePage() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<
     string | null
   >(null)
+  const [cargando, setCargando] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    obtenerProductos().then(setProductos)
-    obtenerCategorias().then(setCategorias)
+    Promise.all([obtenerProductos(), obtenerCategorias()])
+      .then(([productosData, categoriasData]) => {
+        setProductos(productosData)
+        setCategorias(categoriasData)
+      })
+      .catch(() => {
+        setError(
+          "No se pudo cargar el catálogo. Verifica que el servidor esté en funcionamiento.",
+        )
+      })
+      .finally(() => setCargando(false))
   }, [])
 
   const productosFiltrados =
@@ -22,6 +33,27 @@ function HomePage() {
       : productos.filter(
           (producto) => producto.categoria === categoriaSeleccionada,
         )
+
+  if (cargando) {
+    return (
+      <main className="mx-auto max-w-6xl px-4 py-8">
+        <p className="text-muted-foreground">Cargando catálogo...</p>
+      </main>
+    )
+  }
+
+  if (error) {
+    return (
+      <main className="mx-auto max-w-6xl px-4 py-8">
+        <p
+          role="alert"
+          className="rounded-md border border-destructive/50 bg-destructive/10 p-4 text-destructive"
+        >
+          {error}
+        </p>
+      </main>
+    )
+  }
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
