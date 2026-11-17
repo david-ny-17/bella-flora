@@ -1,12 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CategoryFilter from "@/components/CategoryFilter"
 import ProductList from "@/components/ProductList"
-import { categorias, productos } from "@/data/mockData"
+import { obtenerCategorias, obtenerProductos } from "@/services/api"
+import type { Categoria, Producto } from "@/types"
 
 function HomePage() {
+  const [productos, setProductos] = useState<Producto[]>([])
+  const [categorias, setCategorias] = useState<Categoria[]>([])
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<
     string | null
   >(null)
+
+  useEffect(() => {
+    obtenerProductos().then(setProductos)
+    obtenerCategorias().then(setCategorias)
+  }, [])
 
   const productosFiltrados =
     categoriaSeleccionada === null
