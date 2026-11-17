@@ -3,7 +3,7 @@ import HomePage from "@/pages/HomePage"
 
 function App() {
   return (
-    <div>
+    <div className="min-h-screen bg-pink-50/40">
       <Header />
       <HomePage />
     </div>

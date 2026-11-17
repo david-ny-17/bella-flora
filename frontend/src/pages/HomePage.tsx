@@ -26,6 +26,7 @@ function HomePage() {
       </section>
 
       <section id="catalogo">
+        <h2 className="mb-4 text-2xl font-semibold">Nuestro catálogo</h2>
         <ProductList productos={productosFiltrados} />
       </section>
     </main>
