@@ -31,3 +31,13 @@ npm run dev
 ```
 
 Disponible en http://localhost:5173
+
+## Servicios REST del backend
+
+| Método | Ruta              | Descripción         |
+|--------|-------------------|---------------------|
+| GET    | /api/categorias/  | Lista de categorías |
+| GET    | /api/productos/   | Lista de productos  |
+
+Para cargar datos de ejemplo, crear un administrador con
+`python manage.py createsuperuser` e ingresar a http://localhost:8000/admin
