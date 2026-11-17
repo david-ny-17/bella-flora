@@ -1,37 +1,33 @@
-import { Button } from "@/components/ui/button"
-import type { Categoria } from "@/types"
+import ProductCard from "@/components/ProductCard"
+import type { Producto } from "@/types"
 
-interface CategoryFilterProps {
-  categorias: Categoria[]
-  seleccionada: string | null
-  onSeleccionar: (nombre: string | null) => void
+interface ProductListProps {
+  productos: Producto[]
 }
 
-function CategoryFilter({
-  categorias,
-  seleccionada,
-  onSeleccionar,
-}: CategoryFilterProps) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Button
-        variant={seleccionada === null ? "default" : "outline"}
-        onClick={() => onSeleccionar(null)}
-      >
-        Todas
-      </Button>
+function ProductList({ productos }: ProductListProps) {
+  if (productos.length === 0) {
+    return (
+      <p className="py-12 text-muted-foreground">
+        No hay productos en esta categoría por ahora.
+      </p>
+    )
+  }
 
-      {categorias.map((categoria) => (
-        <Button
-          key={categoria.id}
-          variant={seleccionada === categoria.nombre ? "default" : "outline"}
-          onClick={() => onSeleccionar(categoria.nombre)}
-        >
-          {categoria.nombre}
-        </Button>
+  return (
+    <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+      {productos.map((producto) => (
+        <ProductCard
+          key={producto.id}
+          nombre={producto.nombre}
+          descripcion={producto.descripcion}
+          precio={producto.precio}
+          imagen={producto.imagen}
+          categoria={producto.categoria}
+        />
       ))}
     </div>
   )
 }
 
-export default CategoryFilter
+export default ProductList
