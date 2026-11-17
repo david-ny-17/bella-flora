@@ -23,22 +23,30 @@ function ProductCard({
   categoria,
 }: ProductCardProps) {
   return (
-    <Card className="overflow-hidden pt-0">
-      <img
-        src={imagen}
-        alt={nombre}
-        loading="lazy"
-        className="aspect-[4/3] w-full object-cover"
-      />
-      <CardHeader>
-        <Badge variant="secondary" className="w-fit">
+    <Card className="h-full gap-0 rounded-none border-0 bg-transparent py-0 shadow-none">
+      <div className="relative overflow-hidden rounded-t-full bg-rubor">
+        <img
+          src={imagen}
+          alt={nombre}
+          loading="lazy"
+          className="aspect-[4/5] w-full object-cover"
+        />
+        <Badge className="absolute bottom-3 left-3 border-0 bg-petalo/90 text-hoja backdrop-blur-sm">
           {categoria}
         </Badge>
-        <CardTitle>{nombre}</CardTitle>
-        <CardDescription>{descripcion}</CardDescription>
+      </div>
+
+      <CardHeader className="gap-1 px-1 pt-4">
+        <CardTitle className="font-display text-lg font-semibold leading-snug">
+          {nombre}
+        </CardTitle>
+        <CardDescription className="line-clamp-2">
+          {descripcion}
+        </CardDescription>
       </CardHeader>
-      <CardFooter>
-        <span className="text-xl font-bold text-pink-600">
+
+      <CardFooter className="mt-auto px-1 pt-3">
+        <span className="text-lg font-semibold text-primary">
           S/ {precio.toFixed(2)}
         </span>
       </CardFooter>
