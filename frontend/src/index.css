@@ -128,3 +128,72 @@
     @apply font-sans;
     }
 }
+
+/* ===== Identidad visual de Bella Flora ===== */
+
+@theme {
+  --font-display: "Fraunces Variable", Georgia, serif;
+
+  --color-petalo: #fef5f6;
+  --color-rubor: #f8d7de;
+  --color-peonia: #c0275d;
+  --color-hoja: #1e3b2e;
+  --color-polen: #f2b84b;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #fef5f6;
+  --foreground: #1e3b2e;
+  --card: #fef5f6;
+  --card-foreground: #1e3b2e;
+  --popover: #fef5f6;
+  --popover-foreground: #1e3b2e;
+  --primary: #c0275d;
+  --primary-foreground: #ffffff;
+  --secondary: #f8d7de;
+  --secondary-foreground: #1e3b2e;
+  --muted: #fbe6ea;
+  --muted-foreground: #5c6b63;
+  --accent: #f8d7de;
+  --accent-foreground: #1e3b2e;
+  --border: #ecc9d1;
+  --input: #ecc9d1;
+  --ring: #c0275d;
+}
+
+@layer base {
+  body {
+    font-family: "Figtree Variable", system-ui, sans-serif;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Animación de la flor: cada pétalo se abre desde el centro */
+@keyframes abrir-petalo {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.petalo {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: abrir-petalo 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petalo {
+    animation: none;
+  }
+}
