@@ -1,11 +1,13 @@
+import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import HomePage from "@/pages/HomePage"
 
 function App() {
   return (
-    <div className="min-h-screen bg-pink-50/40">
+    <div className="min-h-screen bg-background">
       <Header />
       <HomePage />
+      <Footer />
     </div>
   )
 }

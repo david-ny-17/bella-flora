@@ -1,33 +1,45 @@
-import ProductCard from "@/components/ProductCard"
-import type { Producto } from "@/types"
+import { Button } from "@/components/ui/button"
+import type { Categoria } from "@/types"
 
-interface ProductListProps {
-  productos: Producto[]
+interface CategoryFilterProps {
+  categorias: Categoria[]
+  seleccionada: string | null
+  onSeleccionar: (nombre: string | null) => void
 }
 
-function ProductList({ productos }: ProductListProps) {
-  if (productos.length === 0) {
-    return (
-      <p className="py-12 text-muted-foreground">
-        No hay productos en esta categoría por ahora.
-      </p>
-    )
-  }
-
+function CategoryFilter({
+  categorias,
+  seleccionada,
+  onSeleccionar,
+}: CategoryFilterProps) {
   return (
-    <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
-      {productos.map((producto) => (
-        <ProductCard
-          key={producto.id}
-          nombre={producto.nombre}
-          descripcion={producto.descripcion}
-          precio={producto.precio}
-          imagen={producto.imagen}
-          categoria={producto.categoria}
-        />
+    <div
+      role="group"
+      aria-label="Filtrar por categoría"
+      className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+    >
+      <Button
+        variant={seleccionada === null ? "default" : "outline"}
+        aria-pressed={seleccionada === null}
+        onClick={() => onSeleccionar(null)}
+        className="h-10 shrink-0 rounded-full px-5"
+      >
+        Todas
+      </Button>
+
+      {categorias.map((categoria) => (
+        <Button
+          key={categoria.id}
+          variant={seleccionada === categoria.nombre ? "default" : "outline"}
+          aria-pressed={seleccionada === categoria.nombre}
+          onClick={() => onSeleccionar(categoria.nombre)}
+          className="h-10 shrink-0 rounded-full px-5"
+        >
+          {categoria.nombre}
+        </Button>
       ))}
     </div>
   )
 }
 
-export default ProductList
+export default CategoryFilter

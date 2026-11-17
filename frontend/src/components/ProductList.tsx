@@ -6,8 +6,16 @@ interface ProductListProps {
 }
 
 function ProductList({ productos }: ProductListProps) {
+  if (productos.length === 0) {
+    return (
+      <p className="py-12 text-muted-foreground">
+        No hay productos en esta categoría por ahora.
+      </p>
+    )
+  }
+
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
       {productos.map((producto) => (
         <ProductCard
           key={producto.id}
