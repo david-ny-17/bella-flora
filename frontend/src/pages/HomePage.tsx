@@ -1,9 +1,18 @@
+import CategoryFilter from "@/components/CategoryFilter"
 import ProductList from "@/components/ProductList"
-import { productos } from "@/data/mockData"
+import { categorias, productos } from "@/data/mockData"
 
 function HomePage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
+      <section id="categorias" className="mb-6">
+        <CategoryFilter
+          categorias={categorias}
+          seleccionada={null}
+          onSeleccionar={() => {}}
+        />
+      </section>
+
       <section id="catalogo">
         <ProductList productos={productos} />
       </section>
