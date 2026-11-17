@@ -8,6 +8,13 @@ function HomePage() {
     string | null
   >(null)
 
+  const productosFiltrados =
+    categoriaSeleccionada === null
+      ? productos
+      : productos.filter(
+          (producto) => producto.categoria === categoriaSeleccionada,
+        )
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
       <section id="categorias" className="mb-6">
@@ -19,7 +26,7 @@ function HomePage() {
       </section>
 
       <section id="catalogo">
-        <ProductList productos={productos} />
+        <ProductList productos={productosFiltrados} />
       </section>
     </main>
   )
