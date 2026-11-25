@@ -11,6 +11,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 
 class ProductoSerializer(serializers.ModelSerializer):
     categoria = serializers.StringRelatedField()
+    estado_stock = serializers.ReadOnlyField()
 
     class Meta:
         model = Producto
@@ -21,5 +22,6 @@ class ProductoSerializer(serializers.ModelSerializer):
             "precio",
             "imagen",
             "stock",
+            "estado_stock",
             "categoria",
         ]
