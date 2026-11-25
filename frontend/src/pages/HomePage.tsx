@@ -4,9 +4,11 @@ import Hero from "@/components/Hero"
 import ProductList from "@/components/ProductList"
 import PromoBanner from "@/components/PromoBanner"
 import SearchBar from "@/components/SearchBar"
+import RecommendedProducts from "@/components/RecommendedProducts"
 import { cn } from "@/lib/utils"
 import { obtenerCategorias, obtenerProductos } from "@/services/api"
 import type { Categoria, Producto } from "@/types"
+
 
 const MENSAJE_ERROR =
   "No se pudo cargar el catálogo. Verifica que el servidor esté en funcionamiento e intenta de nuevo."
@@ -179,8 +181,12 @@ function HomePage() {
                 />
               </div>
             )}
+
+            {!error && (
+              <RecommendedProducts categoria={categoriaSeleccionada} />
+            )}
           </>
-        )}
+         )}
       </main>
     </>
   )
