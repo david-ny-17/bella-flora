@@ -48,3 +48,35 @@ Se asume que la mayoría de los clientes entrará desde el celular, muchas veces
 al llegar desde redes sociales. Por eso la tienda se diseña priorizando la
 visualización en pantallas pequeñas, con textos legibles, botones fáciles de
 tocar y carga rápida de imágenes.
+
+## 3. Características clave
+
+| N.º | Característica | Descripción | Estado actual |
+|-----|----------------|-------------|---------------|
+| 1 | Diseño responsivo | La interfaz se adapta a móvil, tablet y escritorio, con navegación y controles cómodos para pantallas táctiles. | Parcial: la cuadrícula ya se adapta; falta revisar y probar toda la experiencia móvil. |
+| 2 | Gestión básica de inventario | Control del stock de cada producto desde el administrador, con estados visibles en la tienda: disponible, últimas unidades y agotado. | Parcial: el producto ya guarda su stock, pero no se usa en la tienda. |
+| 3 | Visualización, filtrado y búsqueda | Catálogo con filtro por categoría y un buscador por nombre de producto. | Parcial: existen el catálogo y el filtro; falta la búsqueda. |
+| 4 | Promociones y descuentos | Productos con precio rebajado, etiqueta de descuento y destaque de las ofertas. | Pendiente. |
+| 5 | Sistema de recomendación | Sugerencias de productos relacionados, por ejemplo de la misma categoría o marcados como destacados. | Pendiente. |
+
+### Resumen de lo que se agregará
+
+**Backend (Django):**
+
+- Nuevos campos en el modelo de producto para el descuento y para marcar productos destacados.
+- Búsqueda por nombre en el servicio REST de productos.
+- Servicio REST de productos recomendados.
+
+**Frontend (React):**
+
+- Barra de búsqueda junto al filtro de categorías.
+- Etiquetas de stock y de descuento en las tarjetas de producto.
+- Sección de productos recomendados.
+- Ajustes de diseño para dispositivos móviles.
+
+### Criterio de recomendación inicial
+
+Como la tienda aún no registra pedidos, no es posible recomendar según
+compras anteriores. La primera versión recomendará productos de la misma
+categoría y productos destacados por la florería. Cuando existan pedidos, el
+sistema podrá mejorar usando los productos más vendidos.
