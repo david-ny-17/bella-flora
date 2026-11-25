@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import CategoryFilter from "@/components/CategoryFilter"
 import Hero from "@/components/Hero"
 import ProductList from "@/components/ProductList"
+import PromoBanner from "@/components/PromoBanner"
 import SearchBar from "@/components/SearchBar"
 import { cn } from "@/lib/utils"
 import { obtenerCategorias, obtenerProductos } from "@/services/api"
@@ -15,12 +16,35 @@ interface Resultado {
   productos: Producto[]
 }
 
+interface ResumenOfertas {
+  cantidad: number
+  descuentoMaximo: number
+}
+
+function mensajeSinResultados(
+  termino: string,
+  categoria: string | null,
+  soloOfertas: boolean,
+) {
+  if (soloOfertas) {
+    return "No hay ofertas con los filtros elegidos. Prueba con otra categoría o búsqueda."
+  }
+  if (termino) {
+    return `No encontramos productos que coincidan con “${termino}”${
+      categoria ? ` en ${categoria}` : ""
+    }. Prueba con otro nombre.`
+  }
+  return "No hay productos en esta categoría por ahora."
+}
+
 function HomePage() {
   const [categorias, setCategorias] = useState<Categoria[]>([])
   const [resultado, setResultado] = useState<Resultado | null>(null)
+  const [ofertas, setOfertas] = useState<ResumenOfertas | null>(null)
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<
     string | null
   >(null)
+  const [soloOfertas, setSoloOfertas] = useState(false)
   const [busqueda, setBusqueda] = useState("")
   const [terminoBusqueda, setTerminoBusqueda] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -47,9 +71,21 @@ function HomePage() {
 
     obtenerProductos(terminoBusqueda)
       .then((productos) => {
-        if (vigente) {
-          setResultado({ termino: terminoBusqueda, productos })
-          setError(null)
+        if (!vigente) return
+
+        setResultado({ termino: terminoBusqueda, productos })
+        setError(null)
+
+        // El resumen de ofertas se calcula con el catálogo completo
+        if (terminoBusqueda === "") {
+          const enOferta = productos.filter((producto) => producto.en_oferta)
+          setOfertas({
+            cantidad: enOferta.length,
+            descuentoMaximo: Math.max(
+              0,
+              ...enOferta.map((producto) => producto.descuento),
+            ),
+          })
         }
       })
       .catch(() => {
@@ -65,18 +101,12 @@ function HomePage() {
   const buscando = resultado !== null && resultado.termino !== terminoBusqueda
   const productos = resultado?.productos ?? []
 
-  const productosFiltrados =
-    categoriaSeleccionada === null
-      ? productos
-      : productos.filter(
-          (producto) => producto.categoria === categoriaSeleccionada,
-        )
-
-  const mensajeVacio = resultado?.termino
-    ? `No encontramos productos que coincidan con “${resultado.termino}”${
-        categoriaSeleccionada ? ` en ${categoriaSeleccionada}` : ""
-      }. Prueba con otro nombre.`
-    : "No hay productos en esta categoría por ahora."
+  const productosFiltrados = productos.filter(
+    (producto) =>
+      (categoriaSeleccionada === null ||
+        producto.categoria === categoriaSeleccionada) &&
+      (!soloOfertas || producto.en_oferta),
+  )
 
   return (
     <>
@@ -113,6 +143,15 @@ function HomePage() {
 
         {!primeraCarga && (
           <>
+            {ofertas && ofertas.cantidad > 0 && (
+              <PromoBanner
+                cantidad={ofertas.cantidad}
+                descuentoMaximo={ofertas.descuentoMaximo}
+                soloOfertas={soloOfertas}
+                onAlternar={() => setSoloOfertas(!soloOfertas)}
+              />
+            )}
+
             <div className="mb-5">
               <SearchBar valor={busqueda} onCambio={setBusqueda} />
             </div>
@@ -128,14 +167,15 @@ function HomePage() {
             {!error && (
               <div
                 aria-busy={buscando}
-                className={cn(
-                  "transition-opacity",
-                  buscando && "opacity-60",
-                )}
+                className={cn("transition-opacity", buscando && "opacity-60")}
               >
                 <ProductList
                   productos={productosFiltrados}
-                  mensajeVacio={mensajeVacio}
+                  mensajeVacio={mensajeSinResultados(
+                    resultado?.termino ?? "",
+                    categoriaSeleccionada,
+                    soloOfertas,
+                  )}
                 />
               </div>
             )}
