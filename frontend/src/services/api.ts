@@ -23,3 +23,15 @@ export function obtenerProductos(busqueda = ""): Promise<Producto[]> {
 export function obtenerCategorias(): Promise<Categoria[]> {
   return obtener<Categoria[]>("/categorias/")
 }
+
+export function obtenerRecomendados(
+  categoria: string | null = null,
+): Promise<Producto[]> {
+  const parametros = new URLSearchParams()
+  if (categoria) parametros.set("categoria", categoria)
+
+  const consulta = parametros.toString()
+  return obtener<Producto[]>(
+    `/productos/recomendados/${consulta ? `?${consulta}` : ""}`,
+  )
+}
