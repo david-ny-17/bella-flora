@@ -55,7 +55,7 @@ tocar y carga rápida de imágenes.
 |-----|----------------|-------------|---------------|
 | 1 | Diseño responsivo | La interfaz se adapta a móvil, tablet y escritorio, con navegación y controles cómodos para pantallas táctiles. | Completo: menú móvil, botones táctiles de 44 px y pruebas en anchos de 360 a 1280 px. |
 | 2 | Gestión básica de inventario | Control del stock de cada producto desde el administrador, con estados visibles en la tienda: disponible, últimas unidades y agotado. | Completo: stock editable y filtrable en el administrador, y estado visible en cada tarjeta de la tienda. |
-| 3 | Visualización, filtrado y búsqueda | Catálogo con filtro por categoría y un buscador por nombre de producto. | Parcial: existen el catálogo y el filtro; falta la búsqueda. |
+| 3 | Visualización, filtrado y búsqueda | Catálogo con filtro por categoría y un buscador por nombre de producto. | Completo: filtro por categoría y búsqueda por nombre en el servicio REST, combinables entre sí. |
 | 4 | Promociones y descuentos | Productos con precio rebajado, etiqueta de descuento y destaque de las ofertas. | Pendiente. |
 | 5 | Sistema de recomendación | Sugerencias de productos relacionados, por ejemplo de la misma categoría o marcados como destacados. | Pendiente. |
 
