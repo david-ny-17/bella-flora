@@ -12,6 +12,10 @@ class CategoriaSerializer(serializers.ModelSerializer):
 class ProductoSerializer(serializers.ModelSerializer):
     categoria = serializers.StringRelatedField()
     estado_stock = serializers.ReadOnlyField()
+    en_oferta = serializers.ReadOnlyField()
+    precio_final = serializers.DecimalField(
+        max_digits=8, decimal_places=2, read_only=True
+    )
 
     class Meta:
         model = Producto
@@ -20,6 +24,9 @@ class ProductoSerializer(serializers.ModelSerializer):
             "nombre",
             "descripcion",
             "precio",
+            "descuento",
+            "precio_final",
+            "en_oferta",
             "imagen",
             "stock",
             "estado_stock",
