@@ -12,8 +12,12 @@ async function obtener<T>(ruta: string): Promise<T> {
   return respuesta.json()
 }
 
-export function obtenerProductos(): Promise<Producto[]> {
-  return obtener<Producto[]>("/productos/")
+export function obtenerProductos(busqueda = ""): Promise<Producto[]> {
+  const parametros = new URLSearchParams()
+  if (busqueda) parametros.set("search", busqueda)
+
+  const consulta = parametros.toString()
+  return obtener<Producto[]>(`/productos/${consulta ? `?${consulta}` : ""}`)
 }
 
 export function obtenerCategorias(): Promise<Categoria[]> {
