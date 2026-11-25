@@ -30,6 +30,10 @@ class Producto(models.Model):
     )
     imagen = models.URLField(max_length=500)
     stock = models.PositiveIntegerField(default=0)
+    destacado = models.BooleanField(
+        default=False,
+        help_text="Los productos destacados aparecen primero en las recomendaciones.",
+    )
     categoria = models.ForeignKey(
         Categoria,
         on_delete=models.PROTECT,
