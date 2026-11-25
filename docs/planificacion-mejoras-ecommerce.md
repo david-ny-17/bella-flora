@@ -53,7 +53,7 @@ tocar y carga rápida de imágenes.
 
 | N.º | Característica | Descripción | Estado actual |
 |-----|----------------|-------------|---------------|
-| 1 | Diseño responsivo | La interfaz se adapta a móvil, tablet y escritorio, con navegación y controles cómodos para pantallas táctiles. | Parcial: la cuadrícula ya se adapta; falta revisar y probar toda la experiencia móvil. |
+| 1 | Diseño responsivo | La interfaz se adapta a móvil, tablet y escritorio, con navegación y controles cómodos para pantallas táctiles. | Completo: menú móvil, botones táctiles de 44 px y pruebas en anchos de 360 a 1280 px. |
 | 2 | Gestión básica de inventario | Control del stock de cada producto desde el administrador, con estados visibles en la tienda: disponible, últimas unidades y agotado. | Parcial: el producto ya guarda su stock, pero no se usa en la tienda. |
 | 3 | Visualización, filtrado y búsqueda | Catálogo con filtro por categoría y un buscador por nombre de producto. | Parcial: existen el catálogo y el filtro; falta la búsqueda. |
 | 4 | Promociones y descuentos | Productos con precio rebajado, etiqueta de descuento y destaque de las ofertas. | Pendiente. |
