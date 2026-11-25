@@ -59,9 +59,10 @@ class ProductoAdmin(admin.ModelAdmin):
         "precio_con_descuento",
         "stock",
         "estado",
+        "destacado",
     )
-    list_editable = ("descuento", "stock")
-    list_filter = ("categoria", EstadoStockFilter, EnOfertaFilter)
+    list_editable = ("descuento", "stock", "destacado")
+    list_filter = ("categoria", EstadoStockFilter, EnOfertaFilter, "destacado")
     search_fields = ("nombre",)
 
     @admin.display(description="Precio final")
