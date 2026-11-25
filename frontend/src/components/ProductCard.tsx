@@ -29,6 +29,7 @@ function ProductCard({
           src={imagen}
           alt={nombre}
           loading="lazy"
+          decoding="async"
           className="aspect-[4/5] w-full object-cover"
         />
         <Badge className="absolute bottom-3 left-3 border-0 bg-petalo/90 text-hoja backdrop-blur-sm">
@@ -37,7 +38,7 @@ function ProductCard({
       </div>
 
       <CardHeader className="gap-1 px-1 pt-4">
-        <CardTitle className="font-display text-lg font-semibold leading-snug">
+        <CardTitle className="font-display text-base font-semibold leading-snug sm:text-lg">
           {nombre}
         </CardTitle>
         <CardDescription className="line-clamp-2">
@@ -46,7 +47,7 @@ function ProductCard({
       </CardHeader>
 
       <CardFooter className="mt-auto px-1 pt-3">
-        <span className="text-lg font-semibold text-primary">
+        <span className="text-base font-semibold text-primary sm:text-lg">
           S/ {precio.toFixed(2)}
         </span>
       </CardFooter>

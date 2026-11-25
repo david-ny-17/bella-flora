@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 function Hero() {
   return (
     <section className="bg-hoja text-petalo">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             Flores para cada ocasión
@@ -27,7 +27,7 @@ function Hero() {
 
         <Bloom
           animada
-          className="mx-auto w-64 sm:w-80 lg:w-full lg:max-w-md"
+          className="mx-auto w-48 sm:w-80 lg:w-full lg:max-w-md"
         />
       </div>
     </section>
