@@ -57,7 +57,7 @@ tocar y carga rápida de imágenes.
 | 2 | Gestión básica de inventario | Control del stock de cada producto desde el administrador, con estados visibles en la tienda: disponible, últimas unidades y agotado. | Completo: stock editable y filtrable en el administrador, y estado visible en cada tarjeta de la tienda. |
 | 3 | Visualización, filtrado y búsqueda | Catálogo con filtro por categoría y un buscador por nombre de producto. | Completo: filtro por categoría y búsqueda por nombre en el servicio REST, combinables entre sí. |
 | 4 | Promociones y descuentos | Productos con precio rebajado, etiqueta de descuento y destaque de las ofertas. | Completo: descuento por porcentaje configurable desde el administrador, etiqueta y precio anterior tachado en la tienda, y banner con acceso directo a las ofertas. |
-| 5 | Sistema de recomendación | Sugerencias de productos relacionados, por ejemplo de la misma categoría o marcados como destacados. | Pendiente. |
+| 5 | Sistema de recomendación | Sugerencias de productos relacionados, por ejemplo de la misma categoría o marcados como destacados. | Completo: servicio REST que recomienda hasta 4 productos con stock, priorizando la categoría de interés, los destacados y los de mayor descuento; sección «Recomendados para ti» en la tienda. |
 
 ### Resumen de lo que se agregará
 
@@ -74,9 +74,15 @@ tocar y carga rápida de imágenes.
 - Sección de productos recomendados.
 - Ajustes de diseño para dispositivos móviles.
 
-### Criterio de recomendación inicial
+### Criterio de recomendación
 
-Como la tienda aún no registra pedidos, no es posible recomendar según
-compras anteriores. La primera versión recomendará productos de la misma
-categoría y productos destacados por la florería. Cuando existan pedidos, el
-sistema podrá mejorar usando los productos más vendidos.
+Como la tienda aún no registra pedidos, no es posible recomendar según compras
+anteriores. El sistema recomienda hasta 4 productos con stock disponible,
+ordenados así:
+
+1. Productos de la categoría que el cliente está explorando.
+2. Productos marcados como destacados por la florería.
+3. Productos con mayor descuento.
+
+Cuando existan pedidos, el sistema podrá mejorar usando los productos más
+vendidos.

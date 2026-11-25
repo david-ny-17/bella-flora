@@ -3,6 +3,14 @@
 Aplicación web de comercio electrónico para una florería, desarrollada con
 ReactJS (frontend) y Django REST Framework (backend).
 
+## Funcionalidades
+
+- Catálogo de productos con filtro por categoría y búsqueda por nombre.
+- Diseño responsivo, con menú y controles pensados para móviles.
+- Gestión de inventario desde el administrador y estado de stock visible en la tienda.
+- Promociones: descuento por porcentaje, precio rebajado y banner de ofertas.
+- Recomendaciones de productos según la categoría de interés y los destacados.
+
 ## Documentación
 
 - [Ejercicio 01: Análisis del negocio y planificación](docs/ejercicio-01-analisis.md)
@@ -34,10 +42,13 @@ Disponible en http://localhost:5173
 
 ## Servicios REST del backend
 
-| Método | Ruta              | Descripción         |
-|--------|-------------------|---------------------|
-| GET    | /api/categorias/  | Lista de categorías |
-| GET    | /api/productos/   | Lista de productos  |
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | /api/categorias/ | Lista de categorías |
+| GET | /api/productos/ | Lista de productos |
+| GET | /api/productos/?search=texto | Productos cuyo nombre contiene el texto |
+| GET | /api/productos/recomendados/ | Hasta 4 productos recomendados |
+| GET | /api/productos/recomendados/?categoria=Ramos | Recomendados priorizando una categoría |
 
 Para cargar datos de ejemplo, crear un administrador con
 `python manage.py createsuperuser` e ingresar a http://localhost:8000/admin
