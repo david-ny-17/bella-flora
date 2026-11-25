@@ -22,7 +22,7 @@ function CategoryFilter({
         variant={seleccionada === null ? "default" : "outline"}
         aria-pressed={seleccionada === null}
         onClick={() => onSeleccionar(null)}
-        className="h-10 shrink-0 rounded-full px-5"
+        className="h-11 shrink-0 rounded-full px-5"
       >
         Todas
       </Button>
@@ -33,7 +33,7 @@ function CategoryFilter({
           variant={seleccionada === categoria.nombre ? "default" : "outline"}
           aria-pressed={seleccionada === categoria.nombre}
           onClick={() => onSeleccionar(categoria.nombre)}
-          className="h-10 shrink-0 rounded-full px-5"
+          className="h-11 shrink-0 rounded-full px-5"
         >
           {categoria.nombre}
         </Button>
