@@ -2,31 +2,68 @@ import { useEffect, useState } from "react"
 import CategoryFilter from "@/components/CategoryFilter"
 import Hero from "@/components/Hero"
 import ProductList from "@/components/ProductList"
+import SearchBar from "@/components/SearchBar"
+import { cn } from "@/lib/utils"
 import { obtenerCategorias, obtenerProductos } from "@/services/api"
 import type { Categoria, Producto } from "@/types"
 
+const MENSAJE_ERROR =
+  "No se pudo cargar el catálogo. Verifica que el servidor esté en funcionamiento e intenta de nuevo."
+
+interface Resultado {
+  termino: string
+  productos: Producto[]
+}
+
 function HomePage() {
-  const [productos, setProductos] = useState<Producto[]>([])
   const [categorias, setCategorias] = useState<Categoria[]>([])
+  const [resultado, setResultado] = useState<Resultado | null>(null)
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<
     string | null
   >(null)
-  const [cargando, setCargando] = useState(true)
+  const [busqueda, setBusqueda] = useState("")
+  const [terminoBusqueda, setTerminoBusqueda] = useState("")
   const [error, setError] = useState<string | null>(null)
 
+  // Las categorías se consultan una sola vez
   useEffect(() => {
-    Promise.all([obtenerProductos(), obtenerCategorias()])
-      .then(([productosData, categoriasData]) => {
-        setProductos(productosData)
-        setCategorias(categoriasData)
+    obtenerCategorias()
+      .then(setCategorias)
+      .catch(() => setError(MENSAJE_ERROR))
+  }, [])
+
+  // Espera 300 ms después de la última tecla antes de buscar
+  useEffect(() => {
+    const temporizador = setTimeout(() => {
+      setTerminoBusqueda(busqueda.trim())
+    }, 300)
+
+    return () => clearTimeout(temporizador)
+  }, [busqueda])
+
+  // Los productos se consultan al inicio y cada vez que cambia el término
+  useEffect(() => {
+    let vigente = true
+
+    obtenerProductos(terminoBusqueda)
+      .then((productos) => {
+        if (vigente) {
+          setResultado({ termino: terminoBusqueda, productos })
+          setError(null)
+        }
       })
       .catch(() => {
-        setError(
-          "No se pudo cargar el catálogo. Verifica que el servidor esté en funcionamiento e intenta de nuevo.",
-        )
+        if (vigente) setError(MENSAJE_ERROR)
       })
-      .finally(() => setCargando(false))
-  }, [])
+
+    return () => {
+      vigente = false
+    }
+  }, [terminoBusqueda])
+
+  const primeraCarga = resultado === null
+  const buscando = resultado !== null && resultado.termino !== terminoBusqueda
+  const productos = resultado?.productos ?? []
 
   const productosFiltrados =
     categoriaSeleccionada === null
@@ -34,6 +71,12 @@ function HomePage() {
       : productos.filter(
           (producto) => producto.categoria === categoriaSeleccionada,
         )
+
+  const mensajeVacio = resultado?.termino
+    ? `No encontramos productos que coincidan con “${resultado.termino}”${
+        categoriaSeleccionada ? ` en ${categoriaSeleccionada}` : ""
+      }. Prueba con otro nombre.`
+    : "No hay productos en esta categoría por ahora."
 
   return (
     <>
@@ -47,7 +90,7 @@ function HomePage() {
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
             Nuestro catálogo
           </h2>
-          {!cargando && !error && (
+          {!primeraCarga && !error && (
             <p className="text-sm text-muted-foreground" aria-live="polite">
               {productosFiltrados.length}{" "}
               {productosFiltrados.length === 1 ? "producto" : "productos"}
@@ -55,21 +98,25 @@ function HomePage() {
           )}
         </div>
 
-        {cargando && (
+        {primeraCarga && !error && (
           <p className="text-muted-foreground">Cargando catálogo...</p>
         )}
 
         {error && (
           <p
             role="alert"
-            className="rounded-md border border-destructive/50 bg-destructive/10 p-4 text-destructive"
+            className="mb-6 rounded-md border border-destructive/50 bg-destructive/10 p-4 text-destructive"
           >
             {error}
           </p>
         )}
 
-        {!cargando && !error && (
+        {!primeraCarga && (
           <>
+            <div className="mb-5">
+              <SearchBar valor={busqueda} onCambio={setBusqueda} />
+            </div>
+
             <div id="categorias" className="mb-10 scroll-mt-20">
               <CategoryFilter
                 categorias={categorias}
@@ -77,7 +124,21 @@ function HomePage() {
                 onSeleccionar={setCategoriaSeleccionada}
               />
             </div>
-            <ProductList productos={productosFiltrados} />
+
+            {!error && (
+              <div
+                aria-busy={buscando}
+                className={cn(
+                  "transition-opacity",
+                  buscando && "opacity-60",
+                )}
+              >
+                <ProductList
+                  productos={productosFiltrados}
+                  mensajeVacio={mensajeVacio}
+                />
+              </div>
+            )}
           </>
         )}
       </main>
