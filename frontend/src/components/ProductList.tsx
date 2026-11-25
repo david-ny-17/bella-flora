@@ -22,6 +22,8 @@ function ProductList({
           nombre={producto.nombre}
           descripcion={producto.descripcion}
           precio={producto.precio}
+          descuento={producto.descuento}
+          precioFinal={producto.precio_final}
           imagen={producto.imagen}
           categoria={producto.categoria}
           stock={producto.stock}

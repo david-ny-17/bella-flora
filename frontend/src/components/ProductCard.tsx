@@ -13,6 +13,8 @@ interface ProductCardProps {
   nombre: string
   descripcion: string
   precio: number
+  descuento: number
+  precioFinal: number
   imagen: string
   categoria: string
   stock: number
@@ -37,11 +39,15 @@ function ProductCard({
   nombre,
   descripcion,
   precio,
+  descuento,
+  precioFinal,
   imagen,
   categoria,
   stock,
   estadoStock,
 }: ProductCardProps) {
+  const enOferta = descuento > 0
+
   return (
     <Card className="h-full gap-0 rounded-none border-0 bg-transparent py-0 shadow-none ring-0">
       <div className="relative overflow-hidden rounded-t-full bg-rubor">
@@ -55,6 +61,13 @@ function ProductCard({
             estadoStock === "agotado" && "opacity-60 grayscale",
           )}
         />
+
+        {enOferta && (
+          <Badge className="absolute bottom-11 left-3 border-0 bg-primary font-semibold text-primary-foreground">
+            -{descuento}%
+          </Badge>
+        )}
+
         <Badge className="absolute bottom-3 left-3 border-0 bg-petalo/90 text-hoja backdrop-blur-sm">
           {categoria}
         </Badge>
@@ -70,9 +83,18 @@ function ProductCard({
       </CardHeader>
 
       <CardFooter className="mt-auto flex-col items-start gap-1 border-t-0 bg-transparent px-1 pb-0 pt-3">
-        <span className="text-base font-semibold text-primary sm:text-lg">
-          S/ {precio.toFixed(2)}
-        </span>
+        <div className="flex flex-wrap items-baseline gap-x-2">
+          <span className="text-base font-semibold text-primary sm:text-lg">
+            S/ {precioFinal.toFixed(2)}
+          </span>
+          {enOferta && (
+            <del className="text-sm text-muted-foreground">
+              <span className="sr-only">Precio anterior: </span>S/{" "}
+              {precio.toFixed(2)}
+            </del>
+          )}
+        </div>
+
         <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
           <span
             aria-hidden="true"
