@@ -1,3 +1,5 @@
+export type EstadoStock = "disponible" | "ultimas" | "agotado"
+
 export interface Categoria {
   id: number
   nombre: string
@@ -10,5 +12,6 @@ export interface Producto {
   precio: number
   imagen: string
   stock: number
+  estado_stock: EstadoStock
   categoria: string
 }
