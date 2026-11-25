@@ -24,6 +24,9 @@ function ProductList({ productos }: ProductListProps) {
           precio={producto.precio}
           imagen={producto.imagen}
           categoria={producto.categoria}
+          stock={producto.stock}
+          estadoStock={producto.estado_stock}
+        />
         />
       ))}
     </div>
