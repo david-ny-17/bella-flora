@@ -41,3 +41,7 @@ Disponible en http://localhost:5173
 
 Para cargar datos de ejemplo, crear un administrador con
 `python manage.py createsuperuser` e ingresar a http://localhost:8000/admin
+
+- [Ejercicio 06: Funcionalidades adicionales](docs/ejercicio-06-funcionalidades-adicionales.md)
+
+- [Planificación de mejoras del e-commerce](docs/planificacion-mejoras-ecommerce.md)
