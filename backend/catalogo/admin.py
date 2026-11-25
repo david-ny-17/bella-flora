@@ -30,12 +30,43 @@ class EstadoStockFilter(admin.SimpleListFilter):
         return queryset
 
 
+class EnOfertaFilter(admin.SimpleListFilter):
+    title = "oferta"
+    parameter_name = "oferta"
+
+    def lookups(self, request, model_admin):
+        return [
+            ("si", "En oferta"),
+            ("no", "Sin oferta"),
+        ]
+
+    def queryset(self, request, queryset):
+        valor = self.value()
+        if valor == "si":
+            return queryset.filter(descuento__gt=0)
+        if valor == "no":
+            return queryset.filter(descuento=0)
+        return queryset
+
+
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ("nombre", "categoria", "precio", "stock", "estado")
-    list_editable = ("stock",)
-    list_filter = ("categoria", EstadoStockFilter)
+    list_display = (
+        "nombre",
+        "categoria",
+        "precio",
+        "descuento",
+        "precio_con_descuento",
+        "stock",
+        "estado",
+    )
+    list_editable = ("descuento", "stock")
+    list_filter = ("categoria", EstadoStockFilter, EnOfertaFilter)
     search_fields = ("nombre",)
+
+    @admin.display(description="Precio final")
+    def precio_con_descuento(self, producto):
+        return f"S/ {producto.precio_final}"
 
     @admin.display(description="Estado de stock")
     def estado(self, producto):
