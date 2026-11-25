@@ -10,6 +10,9 @@ export interface Producto {
   nombre: string
   descripcion: string
   precio: number
+  descuento: number
+  precio_final: number
+  en_oferta: boolean
   imagen: string
   stock: number
   estado_stock: EstadoStock
