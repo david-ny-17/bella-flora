@@ -27,7 +27,6 @@ function ProductList({ productos }: ProductListProps) {
           stock={producto.stock}
           estadoStock={producto.estado_stock}
         />
-        />
       ))}
     </div>
   )
