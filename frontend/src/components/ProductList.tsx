@@ -3,15 +3,15 @@ import type { Producto } from "@/types"
 
 interface ProductListProps {
   productos: Producto[]
+  mensajeVacio?: string
 }
 
-function ProductList({ productos }: ProductListProps) {
+function ProductList({
+  productos,
+  mensajeVacio = "No hay productos para mostrar.",
+}: ProductListProps) {
   if (productos.length === 0) {
-    return (
-      <p className="py-12 text-muted-foreground">
-        No hay productos en esta categoría por ahora.
-      </p>
-    )
+    return <p className="py-12 text-muted-foreground">{mensajeVacio}</p>
   }
 
   return (
