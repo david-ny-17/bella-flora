@@ -4,7 +4,7 @@ import HomePage from "@/pages/HomePage"
 
 function App() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-dvh bg-background">
       <Header />
       <HomePage />
       <Footer />

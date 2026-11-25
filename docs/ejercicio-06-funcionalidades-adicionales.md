@@ -37,5 +37,3 @@ Bella Flora se necesitan las siguientes funcionalidades.
 | Variables de entorno | Mover la dirección de la API y la clave secreta de Django fuera del código. |
 | Pruebas automáticas | Verificar modelos, servicios REST y componentes clave. |
 | Despliegue | Publicar el frontend y el backend con HTTPS y una base de datos de producción. |
-
-- [Ejercicio 06: Funcionalidades adicionales](docs/ejercicio-06-funcionalidades-adicionales.md)
